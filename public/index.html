@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>科研实验优化 Agent</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./style.css" />
+</head>
+<body>
+  <a class="skip-link" href="#main">跳到内容</a>
+  <header class="topbar">
+    <div class="brand">
+      <div class="logo" aria-hidden="true">RA</div>
+      <div>
+        <h1>科研实验优化 Agent</h1>
+        <p>记录实验、自动分析、推送飞书</p>
+      </div>
+    </div>
+  </header>
+
+  <main id="main" class="layout">
+    <section class="panel form-panel">
+      <h2>新建实验</h2>
+      <form id="experiment-form">
+        <label>
+          <span>实验标题</span>
+          <input name="title" placeholder="例如：无人机小目标检测实验 0429" required />
+        </label>
+        <label>
+          <span>任务方向</span>
+          <input name="task" placeholder="例如：目标检测 / 机器人感知 / 雷达融合" required />
+        </label>
+        <label>
+          <span>当前基线</span>
+          <input name="baseline" placeholder="例如：YOLOv8n + 默认增强" />
+        </label>
+        <label>
+          <span>阶段目标</span>
+          <input name="goal" placeholder="例如：提升 Recall 与小目标 mAP" />
+        </label>
+        <label>
+          <span>实验日志</span>
+          <textarea name="logText" rows="12" placeholder="可直接粘贴训练日志，例如：\nEpoch 1 loss=1.53 precision=0.81 recall=0.34 mAP50=0.42\nEpoch 2 loss=1.21 precision=0.79 recall=0.41 mAP50=0.47" required></textarea>
+        </label>
+        <label>
+          <span>补充备注</span>
+          <textarea name="notes" rows="4" placeholder="例如：这轮修改了学习率和小目标增强策略"></textarea>
+        </label>
+        <button class="btn btn-primary" type="submit">保存实验</button>
+      </form>
+    </section>
+
+    <section class="panel list-panel">
+      <div class="section-head">
+        <h2>实验列表</h2>
+        <button class="btn btn-secondary" id="refresh-btn" type="button">刷新</button>
+      </div>
+      <div id="experiment-list" class="card-list"></div>
+    </section>
+
+    <section class="panel detail-panel">
+      <h2>分析结果</h2>
+      <div id="detail-empty" class="empty-state">请选择左侧实验，或先新建一条记录。</div>
+      <article id="detail-card" class="detail-card hidden">
+        <div class="detail-top">
+          <div>
+            <h3 id="detail-title"></h3>
+            <p id="detail-meta"></p>
+          </div>
+          <div class="actions">
+            <button class="btn btn-secondary" id="analyze-btn" type="button">开始分析</button>
+            <button class="btn btn-primary" id="notify-btn" type="button">发送飞书</button>
+          </div>
+        </div>
+        <div class="detail-grid">
+          <section>
+            <h4>实验信息</h4>
+            <p id="detail-info"></p>
+          </section>
+          <section>
+            <h4>提取指标</h4>
+            <div id="metrics" class="metrics"></div>
+          </section>
+          <section>
+            <h4>阶段总结</h4>
+            <p id="summary"></p>
+          </section>
+          <section>
+            <h4>问题定位</h4>
+            <ul id="bottlenecks"></ul>
+          </section>
+          <section>
+            <h4>优化建议</h4>
+            <ul id="suggestions"></ul>
+          </section>
+          <section>
+            <h4>下一轮实验</h4>
+            <ul id="nextSteps"></ul>
+          </section>
+        </div>
+      </article>
+    </section>
+  </main>
+
+  <script src="./app.js" defer></script>
+</body>
+</html>

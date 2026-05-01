@@ -1,0 +1,17 @@
+{
+  "name": "research-agent-feishu",
+  "version": "1.0.0",
+  "description": "科研实验优化 Agent，支持实验记录、自动分析与飞书通知",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "keywords": ["agent", "research", "feishu", "experiment"],
+  "license": "MIT",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.21.2"
+  }
+}

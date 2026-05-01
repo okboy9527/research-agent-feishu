@@ -1,0 +1,47 @@
+{
+  "experiments": [
+    {
+      "id": "exp_demo_001",
+      "title": "无人机小目标检测基线实验",
+      "task": "目标检测",
+      "baseline": "YOLOv8n + 默认训练参数",
+      "goal": "提升 Recall 与小目标 mAP",
+      "logText": "Epoch 1 loss=1.53 precision=0.81 recall=0.34 mAP50=0.42\nEpoch 2 loss=1.21 precision=0.79 recall=0.41 mAP50=0.47\nEpoch 3 loss=1.08 precision=0.78 recall=0.46 mAP50=0.49",
+      "notes": "这一轮尝试了更高分辨率输入，但召回仍偏低。",
+      "analysis": {
+        "mode": "rule-based",
+        "summary": "针对实验“无人机小目标检测基线实验”，系统已完成日志解析，并生成阶段性问题定位与下一轮实验建议。",
+        "metrics": {
+          "precision": 0.78,
+          "precisionHistory": [0.81, 0.79, 0.78],
+          "recall": 0.46,
+          "recallHistory": [0.34, 0.41, 0.46],
+          "map50": 0.49,
+          "map50History": [0.42, 0.47, 0.49],
+          "loss": 1.08,
+          "lossHistory": [1.53, 1.21, 1.08]
+        },
+        "highlights": [
+          "当前 loss 约为 1.08。",
+          "当前 mAP 指标约为 0.49。"
+        ],
+        "bottlenecks": [
+          "模型偏保守，误检控制较好，但漏检明显，召回率偏低。",
+          "loss 仍偏高，模型可能尚未稳定收敛。",
+          "整体检测质量还有较大提升空间。"
+        ],
+        "suggestions": [
+          "优先检查正负样本分布、置信度阈值、NMS 阈值与小目标样本占比。",
+          "检查学习率、warmup、batch size 与数据质量。"
+        ],
+        "nextSteps": [
+          "做一轮阈值扫描实验，并记录 Precision/Recall/F1 的联动变化。",
+          "优先确认标注质量，再尝试数据增强与骨干网络对比。"
+        ],
+        "generatedAt": "2026-05-01T00:00:00.000Z"
+      },
+      "createdAt": "2026-05-01T00:00:00.000Z",
+      "updatedAt": "2026-05-01T00:00:00.000Z"
+    }
+  ]
+}
